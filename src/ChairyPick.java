@@ -13,12 +13,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import javax.swing.Icon;
+import javax.swing.JTextArea;
 
 
 public class ChairyPick {
 
 	private JFrame frame;
-	private JButton btnNewButton;
 
 	/**
 	 * Launch the application.
@@ -52,17 +53,35 @@ public class ChairyPick {
 		frame.getContentPane().setLayout(null);
 		
 		ImageIcon icon = new ImageIcon("Flight1.png");
-		JButton flight1 = new JButton(new ImageIcon("/Users/komalis/Documents/Honey/ChairyPick/src/img/Flight1.png"));
+		JButton flight1 = new JButton(new ImageIcon(ChairyPick.class.getResource("/img/flight-1.png")));
 		flight1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		flight1.setBounds(34, 236, 390, 127);
+		frame.getContentPane().add(flight1);
+		
+		
+		JButton flight2 = new JButton("flight2");
+		flight2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		flight1.setBounds(93, 218, 284, 97);
-		frame.getContentPane().add(flight1);
+		flight2.setIcon(new ImageIcon(ChairyPick.class.getResource("/img/flight-2.png")));
+		flight2.setBounds(34, 80, 390, 127);
+		frame.getContentPane().add(flight2);
 		
-		btnNewButton = new JButton("New button");
-		btnNewButton.setBounds(90, 127, 117, 29);
-		frame.getContentPane().add(btnNewButton);
+		JTextArea txtrAvailableFlights = new JTextArea();
+		txtrAvailableFlights.setFont(new Font("Orator Std", Font.PLAIN, 25));
+		txtrAvailableFlights.setText("Available Flights");
+		txtrAvailableFlights.setBounds(94, 25, 263, 42);
+		frame.getContentPane().add(txtrAvailableFlights);
+		
+		JButton flight3 = new JButton("flight3");
+		flight3.setIcon(new ImageIcon(ChairyPick.class.getResource("/img/flight-3.png")));
+		flight3.setBounds(34, 388, 390, 127);
+		frame.getContentPane().add(flight3);
 		frame.setBounds(100, 100, 450, 640);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
