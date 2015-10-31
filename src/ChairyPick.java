@@ -1,11 +1,7 @@
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import java.awt.Color;
-import java.awt.GridLayout;
-
 import javax.swing.ImageIcon;
-import javax.swing.JTable;
 import javax.swing.JPanel;
 import java.awt.CardLayout;
 import javax.swing.JButton;
@@ -13,22 +9,22 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import java.awt.Font;
-
 import javax.swing.BorderFactory;
-import javax.swing.Icon;
 import javax.swing.JTextArea;
 import javax.swing.JLabel;
-import javax.swing.JToggleButton;
 import javax.swing.JCheckBox;
 import javax.swing.JTextField;
 
 
-public class ChairyPick {
+public class ChairyPick{
 
 	private JFrame frame;
 	private JTextField txtNumpeople;
 	private JTextField textField;
-
+	private int selectedFlight = 0; //flight identifier 
+	private String flight1 = "San Francisco to New York City";
+	private String flight2 = "San Francisco to Miami";
+	private String flight3 = "San Francisco to Las Vegas";
 	/**
 	 * Launch the application.
 	 */
@@ -71,6 +67,8 @@ public class ChairyPick {
 		frame.getContentPane().add(panelPreferences, "name_1446238417539194000");
 		panelPreferences.setLayout(null);
 		
+		
+		//*****************************************Flight Selection Menu******************************************	
 		JTextArea txtrAvailableFlights = new JTextArea();
 		txtrAvailableFlights.setEditable(false);
 		txtrAvailableFlights.setFont(new Font("Orator Std", Font.PLAIN, 25));
@@ -78,10 +76,10 @@ public class ChairyPick {
 		txtrAvailableFlights.setBounds(94, 32, 263, 42);
 		panelMenu.add(txtrAvailableFlights);
 		
-		ImageIcon icon = new ImageIcon("Flight1.png");
 		JButton flight1 = new JButton(new ImageIcon(ChairyPick.class.getResource("/img/flight-1.png")));
 		flight1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				selectedFlight = 1;
 				panelMenu.setVisible(false);
 				panelPreferences.setVisible(true);
 			}
@@ -92,6 +90,7 @@ public class ChairyPick {
 		JButton flight2 = new JButton("flight2");
 		flight2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				selectedFlight = 2;
 				panelMenu.setVisible(false);
 				panelPreferences.setVisible(true);
 			}
@@ -103,6 +102,7 @@ public class ChairyPick {
 		JButton flight3 = new JButton("flight3");
 		flight3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				selectedFlight = 3;
 				panelMenu.setVisible(false);
 				panelPreferences.setVisible(true);
 			}
@@ -112,6 +112,8 @@ public class ChairyPick {
 		frame.setBounds(100, 100, 450, 640);
 		panelMenu.add(flight3);
 		
+		
+		//*****************************************User Preferences******************************************	
 		JLabel lblNumberOfPeople = new JLabel("Number of People:");
 		lblNumberOfPeople.setFont(new Font("Orator Std", Font.PLAIN, 18));
 		lblNumberOfPeople.setBounds(25, 105, 194, 40);
@@ -174,9 +176,30 @@ public class ChairyPick {
 		btnBack.setIcon(new ImageIcon(ChairyPick.class.getResource("/img/back.png")));
 		btnBack.setBounds(6, 25, 80, 56);
 		panelPreferences.add(btnBack);
-		
-		JPanel panelChart = new JPanel();
+	//*****************************************Plane Chart******************************************	
+		JPanel panelChart = new JPanel(); 
 		frame.getContentPane().add(panelChart, "name_1446238420814244000");
+		panelChart.setLayout(null);
+		
+		JButton busTSeat = new JButton("\n");
+		busTSeat.setIcon(new ImageIcon(ChairyPick.class.getResource("/img/seats/bus-takenseat.png")));
+		busTSeat.setBorder(BorderFactory.createEmptyBorder());
+		busTSeat.setBounds(25, 44, 44, 35);
+		panelChart.add(busTSeat);
+		
+		JButton busFSeat = new JButton("");
+		busFSeat.setIcon(new ImageIcon(ChairyPick.class.getResource("/img/seats/bus-freeseat.png")));
+		busFSeat.setBorder(BorderFactory.createEmptyBorder());
+		busFSeat.setBounds(66, 44, 44, 35);
+		panelChart.add(busFSeat);
+		
+		JButton FSeat = new JButton("");
+		FSeat.setIcon(new ImageIcon(ChairyPick.class.getResource("/img/seats/free-seat.png")));
+		FSeat.setBorder(BorderFactory.createEmptyBorder());
+		FSeat.setBounds(25, 272, 31, 26);
+		panelChart.add(FSeat);
+		
+		
 		
 		JPanel panelCheckout = new JPanel();
 		frame.getContentPane().add(panelCheckout, "name_1446238423153284000");
@@ -187,8 +210,11 @@ public class ChairyPick {
 		JPanel panelTicket = new JPanel();
 		frame.getContentPane().add(panelTicket, "name_1446238611138342000");
 		
-		
 		frame.setBounds(100, 100, 450, 640);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+	
+	private void initializeChart(){
+		Seat currentSeat = new Seat("business-t");
 	}
 }
