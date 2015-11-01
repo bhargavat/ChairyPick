@@ -14,6 +14,13 @@ import javax.swing.JTextArea;
 import javax.swing.JLabel;
 import javax.swing.JCheckBox;
 import javax.swing.JTextField;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.border.LineBorder;
+import javax.swing.border.MatteBorder;
+import javax.swing.BoxLayout;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 
 public class ChairyPick{
@@ -25,6 +32,17 @@ public class ChairyPick{
 	private String flight1 = "San Francisco to New York City";
 	private String flight2 = "San Francisco to Miami";
 	private String flight3 = "San Francisco to Las Vegas";
+	private JTable table;
+	private JTable table_1;
+	private JTable order;
+	private JTextField txtFirstName;
+	private JTextField txtLastName;
+	private JTextField txtCreditCardNumber;
+	private JTextField txtStreetAddress;
+	private JTextField txtCvc;
+	private JTextField txtCity;
+	private JTextField txtState;
+	private JTextField txtZipCode;
 	/**
 	 * Launch the application.
 	 */
@@ -54,6 +72,7 @@ public class ChairyPick{
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBackground(Color.WHITE);
+		frame.setResizable(false);
 		frame.getContentPane().setBackground(new Color(255, 255, 255));
 		frame.getContentPane().setLayout(new CardLayout(0, 0));
 		
@@ -196,13 +215,104 @@ public class ChairyPick{
 		JButton FSeat = new JButton("");
 		FSeat.setIcon(new ImageIcon(ChairyPick.class.getResource("/img/seats/free-seat.png")));
 		FSeat.setBorder(BorderFactory.createEmptyBorder());
-		FSeat.setBounds(25, 272, 31, 26);
+		FSeat.setBounds(25, 188, 31, 26);
 		panelChart.add(FSeat);
 		
 		
-		
+	//*****************************************Order Checkout******************************************
 		JPanel panelCheckout = new JPanel();
 		frame.getContentPane().add(panelCheckout, "name_1446238423153284000");
+		panelCheckout.setLayout(null);
+		
+	    String rowData[][] = { { "Row1-Column1", "Row1-Column2", "Row1-Column3" },
+	            { "Row2-Column1", "Row2-Column2", "Row2-Column3" } };
+	        String columnNames[] = { "Column One", "Column Two", "Column Three" };
+		
+		order = new JTable(rowData, columnNames);
+		order.setBorder(new LineBorder(new Color(0, 0, 0)));
+		order.setBounds(27, 76, 400, 45);
+		panelCheckout.add(order);
+		
+		JLabel lblPaymentOption = new JLabel("Payment Option:");
+		lblPaymentOption.setBounds(37, 226, 132, 45);
+		panelCheckout.add(lblPaymentOption);
+		
+		txtFirstName = new JTextField();
+		txtFirstName.setText("First Name");
+		txtFirstName.setBounds(27, 290, 173, 28);
+		panelCheckout.add(txtFirstName);
+		txtFirstName.setColumns(10);
+		
+		txtLastName = new JTextField();
+		txtLastName.setText("Last Name");
+		txtLastName.setBounds(212, 290, 172, 28);
+		panelCheckout.add(txtLastName);
+		txtLastName.setColumns(10);
+		
+		txtCreditCardNumber = new JTextField();
+		txtCreditCardNumber.setText("Credit Card Number");
+		txtCreditCardNumber.setBounds(27, 352, 275, 28);
+		panelCheckout.add(txtCreditCardNumber);
+		txtCreditCardNumber.setColumns(10);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Visa", "MasterCard", "American Express", "Discover"}));
+		comboBox.setBounds(202, 236, 139, 27);
+		panelCheckout.add(comboBox);
+		
+		JLabel lblExpirationDate = new JLabel("Expiration Date:");
+		lblExpirationDate.setBounds(27, 402, 132, 28);
+		panelCheckout.add(lblExpirationDate);
+		
+		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"Month", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"}));
+		comboBox_1.setBounds(161, 404, 112, 27);
+		panelCheckout.add(comboBox_1);
+		
+		JComboBox comboBox_2 = new JComboBox();
+		comboBox_2.setModel(new DefaultComboBoxModel(new String[] {"Year", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024"}));
+		comboBox_2.setBounds(297, 404, 85, 27);
+		panelCheckout.add(comboBox_2);
+		
+		JLabel lblBillingAddress = new JLabel("Billing Address:");
+		lblBillingAddress.setBounds(27, 442, 112, 28);
+		panelCheckout.add(lblBillingAddress);
+		
+		txtStreetAddress = new JTextField();
+		txtStreetAddress.setText("Street Address");
+		txtStreetAddress.setBounds(161, 442, 220, 28);
+		panelCheckout.add(txtStreetAddress);
+		txtStreetAddress.setColumns(10);
+		
+		txtCvc = new JTextField();
+		txtCvc.setText("CVC");
+		txtCvc.setBounds(325, 352, 59, 28);
+		panelCheckout.add(txtCvc);
+		txtCvc.setColumns(10);
+		
+		txtCity = new JTextField();
+		txtCity.setText("City");
+		txtCity.setBounds(27, 494, 134, 28);
+		panelCheckout.add(txtCity);
+		txtCity.setColumns(10);
+		
+		txtState = new JTextField();
+		txtState.setText("State");
+		txtState.setBounds(171, 494, 79, 28);
+		panelCheckout.add(txtState);
+		txtState.setColumns(10);
+		
+		txtZipCode = new JTextField();
+		txtZipCode.setText("Zip Code");
+		txtZipCode.setBounds(262, 494, 122, 28);
+		panelCheckout.add(txtZipCode);
+		txtZipCode.setColumns(10);
+		
+		JButton button = new JButton("");
+		button.setIcon(new ImageIcon(ChairyPick.class.getResource("/img/pay-button.png")));
+		button.setBounds(151, 556, 122, 36);
+		panelCheckout.add(button);
+		
 		
 		JPanel panelFlights = new JPanel();
 		frame.getContentPane().add(panelFlights, "name_1446238425531267000");
