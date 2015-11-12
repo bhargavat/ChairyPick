@@ -221,6 +221,7 @@ public class ChairyPick{
 		
 	//*****************************************Order Checkout******************************************
 		JPanel panelCheckout = new JPanel();
+		panelCheckout.setBackground(Color.WHITE);
 		frame.getContentPane().add(panelCheckout, "name_1446238423153284000");
 		panelCheckout.setLayout(null);
 		
@@ -229,6 +230,15 @@ public class ChairyPick{
 	        String columnNames[] = { "Column One", "Column Two", "Column Three" };
 		
 		order = new JTable(rowData, columnNames);
+		order.setModel(new DefaultTableModel(
+			new Object[][] {
+				{"Item Description", "Quantity", "Price"},
+				{"SFO to NYC Economy x2", "2", "$400"},
+			},
+			new String[] {
+				"Column One", "Column Two", "Column Three"
+			}
+		));
 		order.setBorder(new LineBorder(new Color(0, 0, 0)));
 		order.setBounds(27, 76, 400, 45);
 		panelCheckout.add(order);
@@ -312,6 +322,11 @@ public class ChairyPick{
 		button.setIcon(new ImageIcon(ChairyPick.class.getResource("/img/pay-button.png")));
 		button.setBounds(151, 556, 122, 36);
 		panelCheckout.add(button);
+		
+		JLabel lblCheckout = new JLabel("Checkout");
+		lblCheckout.setFont(new Font("Orator Std", Font.PLAIN, 24));
+		lblCheckout.setBounds(161, 36, 122, 28);
+		panelCheckout.add(lblCheckout);
 		
 		
 		JPanel panelFlights = new JPanel();
