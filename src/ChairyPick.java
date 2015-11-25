@@ -21,13 +21,14 @@ import javax.swing.border.MatteBorder;
 import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.GridLayout;
 
 
 public class ChairyPick{
 
 	private JFrame frame;
 	private JTextField txtNumpeople;
-	private JTextField textField;
+	private JTextField txtChild;
 	private int selectedFlight = 0; //flight identifier 
 	private String flight1 = "San Francisco to New York City";
 	private String flight2 = "San Francisco to Miami";
@@ -43,6 +44,10 @@ public class ChairyPick{
 	private JTextField txtCity;
 	private JTextField txtState;
 	private JTextField txtZipCode;
+	private JCheckBox chckbxEconomyClass;
+	private JCheckBox chckbxHandicapped;
+	
+	UserPreferences pref; 
 	/**
 	 * Launch the application.
 	 */
@@ -135,43 +140,38 @@ public class ChairyPick{
 		//*****************************************User Preferences******************************************	
 		JLabel lblNumberOfPeople = new JLabel("Number of People:");
 		lblNumberOfPeople.setFont(new Font("Orator Std", Font.PLAIN, 18));
-		lblNumberOfPeople.setBounds(25, 105, 194, 40);
+		lblNumberOfPeople.setBounds(25, 131, 194, 40);
 		panelPreferences.add(lblNumberOfPeople);
 		
 		JLabel lblChildren = new JLabel("How many are children?");
-		lblChildren.setBounds(25, 177, 250, 40);
+		lblChildren.setBounds(25, 197, 250, 40);
 		lblChildren.setFont(new Font("Orator Std", Font.PLAIN, 18));
 		panelPreferences.add(lblChildren);
 		
 		JCheckBox chckbxBusinessClass = new JCheckBox("Business Class");
 		chckbxBusinessClass.setFont(new Font("Orator Std", Font.PLAIN, 16));
-		chckbxBusinessClass.setBounds(25, 255, 182, 23);
+		chckbxBusinessClass.setBounds(25, 281, 182, 23);
 		panelPreferences.add(chckbxBusinessClass);
 		
-		JCheckBox chckbxEconomyClass = new JCheckBox("Economy Class");
+		chckbxEconomyClass = new JCheckBox("Economy Class");
 		chckbxEconomyClass.setFont(new Font("Orator Std", Font.PLAIN, 16));
-		chckbxEconomyClass.setBounds(219, 244, 194, 46);
+		chckbxEconomyClass.setBounds(219, 270, 194, 46);
 		panelPreferences.add(chckbxEconomyClass);
 		
 		txtNumpeople = new JTextField();
-		txtNumpeople.setBounds(231, 107, 134, 28);
+		txtNumpeople.setBounds(231, 133, 80, 28);
 		panelPreferences.add(txtNumpeople);
 		txtNumpeople.setColumns(10);
 		
-		textField = new JTextField();
-		textField.setBounds(288, 179, 61, 28);
-		panelPreferences.add(textField);
-		textField.setColumns(10);
+		txtChild = new JTextField();
+		txtChild.setBounds(288, 199, 61, 28);
+		panelPreferences.add(txtChild);
+		txtChild.setColumns(1);
 		
-		JCheckBox chckbxHandicapped = new JCheckBox("Handicapped");
+		chckbxHandicapped = new JCheckBox("Handicapped");
 		chckbxHandicapped.setFont(new Font("Orator Std", Font.PLAIN, 16));
-		chckbxHandicapped.setBounds(106, 323, 205, 37);
+		chckbxHandicapped.setBounds(131, 345, 205, 37);
 		panelPreferences.add(chckbxHandicapped);
-		
-		JCheckBox chckbxWindowSeat = new JCheckBox("Window Seat");
-		chckbxWindowSeat.setFont(new Font("Orator Std", Font.PLAIN, 16));
-		chckbxWindowSeat.setBounds(106, 386, 217, 42);
-		panelPreferences.add(chckbxWindowSeat);
 		
 		JLabel lblSeatPreferences = new JLabel("Seat Preferences");
 		lblSeatPreferences.setFont(new Font("Orator Std", Font.PLAIN, 24));
@@ -179,10 +179,19 @@ public class ChairyPick{
 		lblSeatPreferences.setBounds(95, 40, 279, 40);
 		panelPreferences.add(lblSeatPreferences);
 		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.setIcon(new ImageIcon(ChairyPick.class.getResource("/img/search.png")));
-		btnNewButton.setBounds(62, 489, 303, 70);
-		panelPreferences.add(btnNewButton);
+		JButton btnSearch = new JButton("Search");
+		btnSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int people = Integer.parseInt(txtNumpeople.getText());
+				int child = Integer.parseInt(txtChild.getText());
+				boolean eco = chckbxEconomyClass.isEnabled();
+				boolean handicap = chckbxHandicapped.isEnabled();
+				UserPreferences pref = new UserPreferences(people,child,eco,handicap);
+			}
+		});
+		btnSearch.setIcon(new ImageIcon(ChairyPick.class.getResource("/img/search.png")));
+		btnSearch.setBounds(62, 453, 303, 70);
+		panelPreferences.add(btnSearch);
 		
 		JButton btnBack = new JButton("");
 		btnBack.addActionListener(new ActionListener() {
@@ -199,24 +208,6 @@ public class ChairyPick{
 		JPanel panelChart = new JPanel(); 
 		frame.getContentPane().add(panelChart, "name_1446238420814244000");
 		panelChart.setLayout(null);
-		
-		JButton busTSeat = new JButton("\n");
-		busTSeat.setIcon(new ImageIcon(ChairyPick.class.getResource("/img/seats/bus-takenseat.png")));
-		busTSeat.setBorder(BorderFactory.createEmptyBorder());
-		busTSeat.setBounds(25, 44, 44, 35);
-		panelChart.add(busTSeat);
-		
-		JButton busFSeat = new JButton("");
-		busFSeat.setIcon(new ImageIcon(ChairyPick.class.getResource("/img/seats/bus-freeseat.png")));
-		busFSeat.setBorder(BorderFactory.createEmptyBorder());
-		busFSeat.setBounds(66, 44, 44, 35);
-		panelChart.add(busFSeat);
-		
-		JButton FSeat = new JButton("");
-		FSeat.setIcon(new ImageIcon(ChairyPick.class.getResource("/img/seats/free-seat.png")));
-		FSeat.setBorder(BorderFactory.createEmptyBorder());
-		FSeat.setBounds(25, 188, 31, 26);
-		panelChart.add(FSeat);
 		
 		
 	//*****************************************Order Checkout******************************************
@@ -240,7 +231,7 @@ public class ChairyPick{
 			}
 		));
 		order.setBorder(new LineBorder(new Color(0, 0, 0)));
-		order.setBounds(27, 76, 400, 45);
+		order.setBounds(37, 86, 400, 45);
 		panelCheckout.add(order);
 		
 		JLabel lblPaymentOption = new JLabel("Payment Option:");
@@ -340,6 +331,6 @@ public class ChairyPick{
 	}
 	
 	private void initializeChart(){
-		Seat currentSeat = new Seat("business-t");
+
 	}
 }
